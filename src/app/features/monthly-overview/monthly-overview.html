@@ -1,0 +1,84 @@
+<div class="card">
+    <h2>Monatlicher Überblick</h2>
+    <p class="subtitle">
+        Trage deine typischen monatlichen Einnahmen und Ausgaben ein, um zu sehen,
+        wie viel du realistisch investieren kannst.
+    </p>
+
+    <div class="grid">
+        <!-- Linke Seite: Form -->
+        <section class="panel">
+            <h3>Eingaben</h3>
+
+            <div class="form-group">
+                <label for="income">Monatliche Einnahmen (netto)</label>
+                <div class="input-row">
+                    <input id="income" type="number" [(ngModel)]="monthlyIncome" placeholder="z.B. 3000" />
+                    <span>€</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fixed">Fixe Ausgaben</label>
+                <small class="hint">Miete, Kredite, Versicherungen, Strom, Internet …</small>
+                <div class="input-row">
+                    <input id="fixed" type="number" [(ngModel)]="fixedExpenses" placeholder="z.B. 1500" />
+                    <span>€</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="variable">Variable Ausgaben</label>
+                <small class="hint">Essen, Freizeit, Shopping, Hobbys …</small>
+                <div class="input-row">
+                    <input id="variable" type="number" [(ngModel)]="variableExpenses" placeholder="z.B. 500" />
+                    <span>€</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rechte Seite: Auswertung -->
+        <section class="panel panel-highlight">
+            <h3>Auswertung</h3>
+
+            <div class="summary-row">
+                <span>Einnahmen</span>
+                <span>{{ monthlyIncome || 0 | number : '1.0-0' }} €</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Gesamtausgaben</span>
+                <span>{{ totalExpenses | number : '1.0-0' }} €</span>
+            </div>
+
+            <hr />
+
+            <div class="summary-row total" [class.negative]="freeAmount < 0">
+                <span>Monatlich frei verfügbar</span>
+                <span>
+                    {{ freeAmount | number : '1.0-0' }} €
+                    <ng-container *ngIf="monthlyIncome && monthlyIncome > 0">
+                        ({{ freeAmountPercent | number : '1.0-1' }} % von den Einnahmen)
+                    </ng-container>
+                </span>
+            </div>
+
+            <div class="hint-box" *ngIf="freeAmount > 0">
+                <p>
+                    Wenn du zum Beispiel
+                    <strong>{{ suggestedInvestment | number : '1.0-0' }} €</strong>
+                    (ca. 50 % deines Überschusses) investierst, bleibt dir trotzdem noch
+                    etwas Puffer für unerwartete Ausgaben.
+                </p>
+            </div>
+
+            <div class="hint-box warning" *ngIf="freeAmount < 0">
+                <p>
+                    Deine Ausgaben sind aktuell höher als deine Einnahmen.
+                    Langfristige Investitionen sind so schwierig – vielleicht kannst du
+                    bei einigen Posten noch optimieren.
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
