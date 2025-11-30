@@ -2,9 +2,18 @@
   <header class="app-header">
     <h1>Investment Tracker</h1>
     <p>Monatlicher Überblick über Einnahmen, Ausgaben & Investitionspotenzial</p>
+
+    <nav class="app-nav">
+      <a routerLink="/monthly-overview" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        Monatlicher Überblick
+      </a>
+      <a routerLink="/investment-planning" routerLinkActive="active">
+        Investitionsplanung
+      </a>
+    </nav>
   </header>
 
   <main class="app-main">
-    <router-outlet />
+    <router-outlet></router-outlet>
   </main>
 </div>

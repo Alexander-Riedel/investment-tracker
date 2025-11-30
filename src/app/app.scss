@@ -7,7 +7,7 @@
 }
 
 .app-header {
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 2rem 1rem;
   background: #111827;
   color: #f9fafb;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -22,6 +22,31 @@
   margin: 0;
   opacity: 0.8;
   font-size: 0.95rem;
+}
+
+.app-nav {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.app-nav a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: #d1d5db;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+
+.app-nav a:hover {
+  border-color: #4b5563;
+}
+
+.app-nav a.active {
+  background: #f9fafb;
+  color: #111827;
+  font-weight: 600;
 }
 
 .app-main {
