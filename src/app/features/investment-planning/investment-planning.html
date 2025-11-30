@@ -1,0 +1,114 @@
+<div class="card">
+    <h2>Investitionsplanung</h2>
+    <p class="subtitle">
+        Lege fest, wie viel du monatlich investieren möchtest und wie du diesen Betrag
+        auf verschiedene Kategorien verteilst.
+    </p>
+
+    <div class="grid">
+        <!-- Linke Seite: Eingaben -->
+        <section class="panel">
+            <h3>Monatlicher Investitionsbetrag</h3>
+
+            <div class="form-group">
+                <label for="monthlyInvestment">Investitionsbetrag pro Monat</label>
+                <small class="hint">
+                    Tipp: Nimm einen Teil deines monatlich frei verfügbaren Betrags.
+                </small>
+                <div class="input-row">
+                    <input id="monthlyInvestment" type="number" [(ngModel)]="monthlyInvestment"
+                        placeholder="z.B. 400" />
+                    <span>€</span>
+                </div>
+            </div>
+
+            <h3>Aufteilung nach Kategorien</h3>
+
+            <div class="form-group">
+                <label for="etfPercent">ETFs / Aktien</label>
+                <small class="hint">Langfristige, breit gestreute Anlagen.</small>
+                <div class="input-row">
+                    <input id="etfPercent" type="number" [(ngModel)]="etfPercent" min="0" max="100" />
+                    <span>%</span>
+                </div>
+                <p class="amount-line">
+                    ≈ {{ etfAmount | number : '1.0-0' }} € / Monat
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="cryptoPercent">Krypto</label>
+                <small class="hint">Höheres Risiko, aber ggf. höhere Chancen.</small>
+                <div class="input-row">
+                    <input id="cryptoPercent" type="number" [(ngModel)]="cryptoPercent" min="0" max="100" />
+                    <span>%</span>
+                </div>
+                <p class="amount-line">
+                    ≈ {{ cryptoAmount | number : '1.0-0' }} € / Monat
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="cashPercent">Tagesgeld / Cash</label>
+                <small class="hint">Sicherheitsreserve oder kurzfristige Ziele.</small>
+                <div class="input-row">
+                    <input id="cashPercent" type="number" [(ngModel)]="cashPercent" min="0" max="100" />
+                    <span>%</span>
+                </div>
+                <p class="amount-line">
+                    ≈ {{ cashAmount | number : '1.0-0' }} € / Monat
+                </p>
+            </div>
+        </section>
+
+        <!-- Rechte Seite: Auswertung -->
+        <section class="panel panel-highlight">
+            <h3>Zusammenfassung</h3>
+
+            <div class="summary-row">
+                <span>Investitionsbetrag pro Monat</span>
+                <span>{{ monthlyInvestment || 0 | number : '1.0-0' }} €</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Summe Prozent</span>
+                <span [class.error]="totalPercent !== 100">
+                    {{ totalPercent }} %
+                </span>
+            </div>
+
+            <hr />
+
+            <div class="summary-row">
+                <span>ETFs / Aktien</span>
+                <span>{{ etfAmount | number : '1.0-0' }} € ({{ etfPercent }} %)</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Krypto</span>
+                <span>{{ cryptoAmount | number : '1.0-0' }} € ({{ cryptoPercent }} %)</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Tagesgeld / Cash</span>
+                <span>{{ cashAmount | number : '1.0-0' }} € ({{ cashPercent }} %)</span>
+            </div>
+
+            <div class="hint-box" *ngIf="totalPercent === 100">
+                <p>
+                    Deine Aufteilung ist konsistent. Dies ist eine grobe strategische
+                    Verteilung – die konkrete Auswahl der Produkte (z. B. bestimmter ETF)
+                    kannst du später noch verfeinern.
+                </p>
+            </div>
+
+            <div class="hint-box warning" *ngIf="totalPercent !== 100">
+                <p>
+                    Die Summe deiner Prozentwerte beträgt derzeit
+                    <strong>{{ totalPercent }} %</strong>.
+                    Passe die Werte so an, dass sie zusammen auf 100 % kommen.
+                </p>
+            </div>
+        </section>
+    </div>
+</div>
